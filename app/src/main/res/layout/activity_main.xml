@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
+    tools:ignore="HardcodedText"
     tools:context="saleh.ma.mostafa.gmail.com.simplecalculator.MainActivity">
 
     <LinearLayout
@@ -36,7 +37,7 @@
             android:paddingBottom="10dp"
             android:textSize="50sp"
             android:textColor="@android:color/black"
-            android:text="0"/>
+            android:text="0" />
 
     </LinearLayout>
 
@@ -67,7 +68,8 @@
                 android:scaleType="center"
                 android:id="@+id/btn_backspace"
                 android:background="@drawable/function_buttons_selector"
-                android:src="@drawable/ic_backspace_black_24dp"/>
+                android:src="@drawable/ic_backspace_black_24dp"
+                android:contentDescription="<" />
 
             <TextView
                 android:gravity="center"
