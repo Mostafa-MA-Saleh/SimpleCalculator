@@ -1,7 +1,9 @@
 package saleh.ma.mostafa.gmail.com.simplecalculator;
 
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.HorizontalScrollView;
@@ -11,30 +13,48 @@ import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import net.objecthunter.exp4j.ValidationResult;
 
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    private boolean mAppend;
-    private String mExpression;
-    private double mResult;
-
+    static final ButterKnife.Setter<TextView, Boolean> ENABLED = new ButterKnife.Setter<TextView, Boolean>() {
+        @Override
+        public void set(@NonNull TextView view, Boolean value, int index) {
+            view.setEnabled(value);
+            if (value) {
+                view.setTextColor(Color.BLACK);
+                view.setBackgroundResource(R.drawable.function_buttons_selector);
+            } else {
+                view.setTextColor(Color.LTGRAY);
+                view.setBackgroundResource(R.drawable.number_buttons_selector);
+            }
+        }
+    };
     @BindView(R.id.scrl_expression)
     HorizontalScrollView scrlExpression;
     @BindView(R.id.tv_expression)
     TextView tvExpression;
     @BindView(R.id.tv_numbers)
     TextView tvNumbers;
+    @BindViews({R.id.btn_memory_clear, R.id.btn_memory_recall})
+    List<TextView> lstMemoryButtons;
+    private boolean mAppend;
+    private String mExpression;
+    private double mResult;
+    private double mMemory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        ButterKnife.apply(lstMemoryButtons, ENABLED, false);
         mAppend = true;
         mExpression = "";
     }
@@ -138,5 +158,35 @@ public class MainActivity extends AppCompatActivity {
         tvExpression.setText("");
         tvNumbers.setText("0");
         mAppend = false;
+    }
+
+    @OnClick(R.id.btn_memory_clear)
+    public void onMemoryClearClick() {
+        mMemory = 0;
+        ButterKnife.apply(lstMemoryButtons, ENABLED, false);
+    }
+
+    @OnClick(R.id.btn_memory_recall)
+    public void onMemoryRecallClick() {
+        tvNumbers.setText(String.valueOf(mMemory));
+        mAppend = false;
+    }
+
+    @OnClick(R.id.btn_memory_add)
+    public void onMemoryAddClick() {
+        mMemory += Double.parseDouble(tvNumbers.getText().toString());
+        ButterKnife.apply(lstMemoryButtons, ENABLED, true);
+    }
+
+    @OnClick(R.id.btn_memory_subtract)
+    public void onMemorySubtractClick() {
+        mMemory -= Double.parseDouble(tvNumbers.getText().toString());
+        ButterKnife.apply(lstMemoryButtons, ENABLED, true);
+    }
+
+    @OnClick(R.id.btn_memory_store)
+    public void onMemoryStoreClick() {
+        mMemory = Double.parseDouble(tvNumbers.getText().toString());
+        ButterKnife.apply(lstMemoryButtons, ENABLED, true);
     }
 }
