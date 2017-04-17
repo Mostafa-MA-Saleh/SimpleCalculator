@@ -67,7 +67,7 @@
                 android:id="@+id/btn_backspace"
                 style="@style/Button"
                 android:background="@drawable/function_buttons_selector"
-                android:contentDescription="<"
+                android:contentDescription="&lt;"
                 android:scaleType="center"
                 android:src="@drawable/ic_backspace" />
 
