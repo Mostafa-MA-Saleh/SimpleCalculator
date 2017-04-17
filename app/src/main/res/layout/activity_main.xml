@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context="saleh.ma.mostafa.gmail.com.simplecalculator.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/tableLayout"
+        android:gravity="end|center_vertical">
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrl_expression">
+            <TextView
+                android:id="@+id/tv_expression"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:scrollHorizontally="true"
+                android:textSize="18sp"
+                android:text="15+40-150/5889*984.25"/>
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/tv_numbers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:textSize="50sp"
+            android:textColor="@android:color/black"
+            android:text="0"/>
+
+    </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout android:layout_height="@dimen/buttons_height">
+
+            <TextView
+                android:gravity="center"
+                style="@style/Button"
+                android:background="@drawable/function_buttons_selector"
+                android:id="@+id/btn_clear_all"
+                android:text="CE" />
+
+            <TextView
+                android:gravity="center"
+                style="@style/Button"
+                android:background="@drawable/function_buttons_selector"
+                android:id="@+id/btn_clear"
+                android:text="C" />
+
+            <ImageView
+                style="@style/Button"
+                android:scaleType="center"
+                android:id="@+id/btn_backspace"
+                android:background="@drawable/function_buttons_selector"
+                android:src="@drawable/ic_backspace_black_24dp"/>
+
+            <TextView
+                android:gravity="center"
+                android:background="@drawable/function_buttons_selector"
+                style="@style/Button"
+                android:id="@+id/btn_divide"
+                android:text="÷" />
+        </LinearLayout>
+
+        <LinearLayout android:layout_height="@dimen/buttons_height">
+
+            <TextView
+                android:gravity="center"
+                style="@style/Button"
+                android:id="@+id/btn_seven"
+                android:text="7" />
+
+            <TextView
+                android:gravity="center"
+                style="@style/Button"
+                android:id="@+id/btn_eight"
+                android:text="8" />
+
+            <TextView
+                android:gravity="center"
+                style="@style/Button"
+                android:id="@+id/btn_nine"
+                android:text="9" />
+
+            <TextView
+                android:gravity="center"
+                style="@style/Button"
+                android:background="@drawable/function_buttons_selector"
+                android:id="@+id/btn_multiply"
+                android:text="×" />
+        </LinearLayout>
+
+        <LinearLayout android:layout_height="@dimen/buttons_height">
+
+            <TextView
+                android:gravity="center"
+                style="@style/Button"
+                android:id="@+id/btn_four"
+                android:text="4" />
+
+            <TextView
+                android:gravity="center"
+                style="@style/Button"
+                android:id="@+id/btn_five"
+                android:text="5" />
+
+            <TextView
+                android:gravity="center"
+                style="@style/Button"
+                android:id="@+id/btn_six"
+                android:text="6" />
+
+            <TextView
+                android:gravity="center"
+                style="@style/Button"
+                android:background="@drawable/function_buttons_selector"
+
+                android:id="@+id/btn_minus"
+                android:text="-" />
+        </LinearLayout>
+
+        <LinearLayout android:layout_height="@dimen/buttons_height">
+
+            <TextView
+                android:gravity="center"
+                style="@style/Button"
+                android:id="@+id/btn_one"
+                android:text="1" />
+
+            <TextView
+                android:gravity="center"
+                style="@style/Button"
+                android:id="@+id/btn_two"
+                android:text="2" />
+
+            <TextView
+                android:gravity="center"
+                style="@style/Button"
+                android:id="@+id/btn_three"
+                android:text="3" />
+
+            <TextView
+                android:gravity="center"
+                style="@style/Button"
+                android:background="@drawable/function_buttons_selector"
+
+                android:id="@+id/btn_plus"
+                android:text="+" />
+        </LinearLayout>
+
+        <LinearLayout android:layout_height="@dimen/buttons_height">
+
+            <TextView
+                android:gravity="center"
+                style="@style/Button"
+                android:id="@+id/btn_positive_negative"
+                android:text="+/-" />
+
+            <TextView
+                android:gravity="center"
+                style="@style/Button"
+                android:id="@+id/btn_zero"
+                android:text="0" />
+
+            <TextView
+                android:gravity="center"
+                style="@style/Button"
+                android:id="@+id/btn_decimal_point"
+                android:text="." />
+
+            <TextView
+                android:gravity="center"
+                style="@style/Button"
+                android:background="@drawable/function_buttons_selector"
+
+                android:id="@+id/btn_equals"
+                android:text="=" />
+        </LinearLayout>
+
+    </TableLayout>
+
+</RelativeLayout>
