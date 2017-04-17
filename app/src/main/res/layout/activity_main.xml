@@ -5,22 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:ignore="HardcodedText"
-    tools:context="saleh.ma.mostafa.gmail.com.simplecalculator.MainActivity">
+    tools:context="saleh.ma.mostafa.gmail.com.simplecalculator.MainActivity"
+    tools:ignore="HardcodedText">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="16dp"
-        android:layout_alignParentTop="true"
         android:layout_above="@+id/tableLayout"
-        android:gravity="end">
+        android:layout_alignParentTop="true"
+        android:layout_margin="16dp"
+        android:gravity="end"
+        android:orientation="vertical">
 
         <HorizontalScrollView
+            android:id="@+id/scrl_expression"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/scrl_expression">
+            android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/tv_expression"
                 android:layout_width="wrap_content"
@@ -35,9 +35,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
-            android:textSize="50sp"
+            android:text="0"
             android:textColor="@android:color/black"
-            android:text="0" />
+            android:textSize="50sp" />
 
     </LinearLayout>
 
@@ -50,147 +50,147 @@
         <LinearLayout android:layout_height="@dimen/buttons_height">
 
             <TextView
-                android:gravity="center"
+                android:id="@+id/btn_clear_all"
                 style="@style/Button"
                 android:background="@drawable/function_buttons_selector"
-                android:id="@+id/btn_clear_all"
+                android:gravity="center"
                 android:text="CE" />
 
             <TextView
-                android:gravity="center"
+                android:id="@+id/btn_clear"
                 style="@style/Button"
                 android:background="@drawable/function_buttons_selector"
-                android:id="@+id/btn_clear"
+                android:gravity="center"
                 android:text="C" />
 
             <ImageView
-                style="@style/Button"
-                android:scaleType="center"
                 android:id="@+id/btn_backspace"
+                style="@style/Button"
                 android:background="@drawable/function_buttons_selector"
-                android:src="@drawable/ic_backspace_black_24dp"
-                android:contentDescription="<" />
+                android:contentDescription="<"
+                android:scaleType="center"
+                android:src="@drawable/ic_backspace" />
 
             <TextView
-                android:gravity="center"
-                android:background="@drawable/function_buttons_selector"
-                style="@style/Button"
                 android:id="@+id/btn_divide"
+                style="@style/Button"
+                android:background="@drawable/function_buttons_selector"
+                android:gravity="center"
                 android:text="÷" />
         </LinearLayout>
 
         <LinearLayout android:layout_height="@dimen/buttons_height">
 
             <TextView
-                android:gravity="center"
-                style="@style/Button"
                 android:id="@+id/btn_seven"
+                style="@style/Button"
+                android:gravity="center"
                 android:text="7" />
 
             <TextView
-                android:gravity="center"
-                style="@style/Button"
                 android:id="@+id/btn_eight"
+                style="@style/Button"
+                android:gravity="center"
                 android:text="8" />
 
             <TextView
-                android:gravity="center"
-                style="@style/Button"
                 android:id="@+id/btn_nine"
+                style="@style/Button"
+                android:gravity="center"
                 android:text="9" />
 
             <TextView
-                android:gravity="center"
+                android:id="@+id/btn_multiply"
                 style="@style/Button"
                 android:background="@drawable/function_buttons_selector"
-                android:id="@+id/btn_multiply"
+                android:gravity="center"
                 android:text="×" />
         </LinearLayout>
 
         <LinearLayout android:layout_height="@dimen/buttons_height">
 
             <TextView
-                android:gravity="center"
-                style="@style/Button"
                 android:id="@+id/btn_four"
+                style="@style/Button"
+                android:gravity="center"
                 android:text="4" />
 
             <TextView
-                android:gravity="center"
-                style="@style/Button"
                 android:id="@+id/btn_five"
+                style="@style/Button"
+                android:gravity="center"
                 android:text="5" />
 
             <TextView
-                android:gravity="center"
-                style="@style/Button"
                 android:id="@+id/btn_six"
+                style="@style/Button"
+                android:gravity="center"
                 android:text="6" />
 
             <TextView
-                android:gravity="center"
+                android:id="@+id/btn_minus"
                 style="@style/Button"
                 android:background="@drawable/function_buttons_selector"
 
-                android:id="@+id/btn_minus"
+                android:gravity="center"
                 android:text="-" />
         </LinearLayout>
 
         <LinearLayout android:layout_height="@dimen/buttons_height">
 
             <TextView
-                android:gravity="center"
-                style="@style/Button"
                 android:id="@+id/btn_one"
+                style="@style/Button"
+                android:gravity="center"
                 android:text="1" />
 
             <TextView
-                android:gravity="center"
-                style="@style/Button"
                 android:id="@+id/btn_two"
+                style="@style/Button"
+                android:gravity="center"
                 android:text="2" />
 
             <TextView
-                android:gravity="center"
-                style="@style/Button"
                 android:id="@+id/btn_three"
+                style="@style/Button"
+                android:gravity="center"
                 android:text="3" />
 
             <TextView
-                android:gravity="center"
+                android:id="@+id/btn_plus"
                 style="@style/Button"
                 android:background="@drawable/function_buttons_selector"
 
-                android:id="@+id/btn_plus"
+                android:gravity="center"
                 android:text="+" />
         </LinearLayout>
 
         <LinearLayout android:layout_height="@dimen/buttons_height">
 
             <TextView
-                android:gravity="center"
-                style="@style/Button"
                 android:id="@+id/btn_positive_negative"
+                style="@style/Button"
+                android:gravity="center"
                 android:text="+/-" />
 
             <TextView
-                android:gravity="center"
-                style="@style/Button"
                 android:id="@+id/btn_zero"
+                style="@style/Button"
+                android:gravity="center"
                 android:text="0" />
 
             <TextView
-                android:gravity="center"
-                style="@style/Button"
                 android:id="@+id/btn_decimal_point"
+                style="@style/Button"
+                android:gravity="center"
                 android:text="." />
 
             <TextView
-                android:gravity="center"
+                android:id="@+id/btn_equals"
                 style="@style/Button"
                 android:background="@drawable/function_buttons_selector"
 
-                android:id="@+id/btn_equals"
+                android:gravity="center"
                 android:text="=" />
         </LinearLayout>
 
