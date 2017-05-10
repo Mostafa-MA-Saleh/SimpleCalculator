@@ -1,18 +1,28 @@
-package saleh.ma.mostafa.gmail.com.simplecalculator;
+package saleh.ma.mostafa.gmail.com.simplecalculator.activities;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.codemybrainsout.ratingdialog.RatingDialog;
+import com.yqritc.scalablevideoview.ScalableVideoView;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import net.objecthunter.exp4j.ValidationResult;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -20,8 +30,12 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import saleh.ma.mostafa.gmail.com.simplecalculator.R;
+import saleh.ma.mostafa.gmail.com.simplecalculator.dialogs.AboutDialog;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String TAG = "SimpleCalculator";
 
     static final ButterKnife.Setter<TextView, Boolean> ENABLED = new ButterKnife.Setter<TextView, Boolean>() {
         @Override
@@ -36,14 +50,19 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+    @BindView(R.id.vid_explosion)
+    ScalableVideoView vidExplosion;
     @BindView(R.id.scrl_expression)
     HorizontalScrollView scrlExpression;
     @BindView(R.id.tv_expression)
     TextView tvExpression;
     @BindView(R.id.tv_numbers)
     TextView tvNumbers;
+
     @BindViews({R.id.btn_memory_clear, R.id.btn_memory_recall})
     List<TextView> lstMemoryButtons;
+
     private boolean mAppend;
     private String mExpression;
     private double mResult;
@@ -57,6 +76,38 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.apply(lstMemoryButtons, ENABLED, false);
         mAppend = true;
         mExpression = "";
+        new RatingDialog.Builder(this)
+                .threshold(3)
+                .session(7)
+                .onRatingBarFormSumbit(new RatingDialog.Builder.RatingDialogFormListener() {
+                    @Override
+                    public void onFormSubmitted(String feedback) {
+                        Intent i = new Intent(Intent.ACTION_SEND);
+                        i.setType("message/rfc822");
+                        i.putExtra(Intent.EXTRA_EMAIL, new String[]{"mostafa.ma.saleh@gmail.com"});
+                        i.putExtra(Intent.EXTRA_SUBJECT, "Simple Calculator Feedback");
+                        i.putExtra(Intent.EXTRA_TEXT, feedback);
+                        try {
+                            startActivity(Intent.createChooser(i, "Send mail..."));
+                        } catch (android.content.ActivityNotFoundException ex) {
+                            Toast.makeText(MainActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).build().show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_about) {
+            new AboutDialog(this).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @OnClick({R.id.btn_zero, R.id.btn_one, R.id.btn_two,
@@ -108,7 +159,17 @@ public class MainActivity extends AppCompatActivity {
             }
             Expression e = new ExpressionBuilder(mExpression).build();
             if (e.validate() == ValidationResult.SUCCESS) {
-                mResult = e.evaluate();
+                try {
+                    mResult = e.evaluate();
+                } catch (ArithmeticException ae) {
+                    mResult = 0;
+                    try {
+                        playVideo(vidExplosion);
+                    } catch (IOException ioe) {
+                        Log.e(TAG, "Failed to initialize video");
+                    }
+                    Toast.makeText(this, "Seriously, Trying to divide by zero???!!", Toast.LENGTH_LONG).show();
+                }
                 tvNumbers.setText(String.valueOf(mResult));
                 mExpression = "";
                 tvExpression.setText("");
@@ -188,5 +249,18 @@ public class MainActivity extends AppCompatActivity {
     public void onMemoryStoreClick() {
         mMemory = Double.parseDouble(tvNumbers.getText().toString());
         ButterKnife.apply(lstMemoryButtons, ENABLED, true);
+    }
+
+    private void playVideo(final ScalableVideoView vid) throws IOException {
+        vid.setRawData(R.raw.explosion);
+        vid.prepare();
+        vid.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                vid.setVisibility(View.GONE);
+            }
+        });
+        vid.setVisibility(View.VISIBLE);
+        vid.start();
     }
 }

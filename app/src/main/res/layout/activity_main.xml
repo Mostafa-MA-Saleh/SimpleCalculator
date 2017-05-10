@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context="saleh.ma.mostafa.gmail.com.simplecalculator.MainActivity"
+    tools:context="saleh.ma.mostafa.gmail.com.simplecalculator.activities.MainActivity"
     tools:ignore="HardcodedText">
 
     <LinearLayout
@@ -234,5 +234,13 @@
         </LinearLayout>
 
     </TableLayout>
+
+    <com.yqritc.scalablevideoview.ScalableVideoView
+        android:id="@+id/vid_explosion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:scalableType="centerCrop" />
+
 
 </RelativeLayout>
